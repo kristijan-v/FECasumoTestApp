@@ -1,4 +1,3 @@
-// StyledComponents.ts
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -13,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-family: 'CustomFont1', sans-serif; /* Assuming you have a custom font */
+  font-family: 'CustomFont1', sans-serif;
   color: #32325D;
   font-size: 24px;
   text-align: center;
@@ -29,7 +28,7 @@ export const Label = styled.label`
   font-family: 'CustomFont1', sans-serif;
   color: #6B7C93;
   font-size: 16px;
-  display: block; /* Ensures the label is on top of the input */
+  display: block;
   margin-bottom: 5px;
 `;
 
@@ -40,10 +39,10 @@ export const Input = styled.input`
   margin-bottom: 20px;
   border: 0;
   border-bottom: 1px solid #DDE3E9;
-  background-color: transparent; /* Matches the design's input field background */
+  background-color: transparent;
   display: block;
   width: 100%;
-  box-sizing: border-box; /* Ensures padding doesn't affect the overall width */
+  box-sizing: border-box;
 `;
 
 
