@@ -23,8 +23,11 @@ export const ContentContainer = styled.div`
 `;
 
 export const CardListContainer = styled.div`
+display: flex;
+flex-direction: column;
   flex-grow: 1;
   overflow-y: auto;
+  gap: 20px;
 `;
 
 export const CardButtonContainer = styled.div`

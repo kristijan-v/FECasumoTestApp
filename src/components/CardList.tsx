@@ -11,6 +11,7 @@ import {PageContainer,
   Header,
 } from './styles/CardList'
 import Card from './CreditCard';
+import VisaCreditCard from './VisaCreditCard';
 
 
 interface CardListProps {
@@ -24,6 +25,14 @@ const mockCard = {
   name: 'John Cabruci',
   number: '5532 1234 5545 8014',
   expiry: '08/21',
+};
+
+const mockCardVisa = {
+  id: -2,
+  cvc: '129',
+  name: 'John Cabruci',
+  number: '0923 1231 8892 2381',
+  expiry: '12/24',
 };
 
 const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
@@ -43,6 +52,13 @@ const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
             name={mockCard.name}
             number={mockCard.number}
             expiry={mockCard.expiry}
+          />
+        <VisaCreditCard
+            key={mockCardVisa.id}
+            cvc={mockCardVisa.cvc}
+            name={mockCardVisa.name}
+            number={mockCardVisa.number}
+            expiry={mockCardVisa.expiry}
           />
           {cards.map((card) => (
             <Card

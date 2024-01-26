@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
-  background: linear-gradient(145deg, #3B058E, #5E34A9);
+  background: #49dad7;
   border-radius: 16px;
   padding: 1em;
   width: 320px;
@@ -22,7 +22,7 @@ export const BackgroundPattern = styled.div`
   right: 0;
   height: 100%;
   width: 100%;
-  background-image: url('/pics/card-background-shape.svg');
+  background-image: url('/pics/visa-card-background.svg');
   background-size: cover;
 `;
 
@@ -54,9 +54,9 @@ export const EditButton = styled.button`
 
 export const CardNumber = styled.div`
   font-size: 16px;
+  font-weight: bold;
   
-  
-  color: #E5E5E5;
+  color: #444E5D;
   position: absolute;
   bottom: 32px;
   left: 24px;
