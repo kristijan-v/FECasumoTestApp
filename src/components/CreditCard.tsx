@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   CardWrapper,
   BackgroundPattern,
@@ -8,7 +8,8 @@ import {
   Expiry,
   CVC,
   EditButton,
-} from './styles/Card';
+} from "./styles/Card";
+import "../custom-font1.css";
 
 interface CardProps {
   number: string;
@@ -26,15 +27,23 @@ const CreditCard: React.FC<CardProps> = ({ name, number, expiry, cvc }) => {
       </LogoWrapper>
       <div>
         <CardNumber>{number}</CardNumber>
+      </div>
+      <div>
         <CardHolder>{name}</CardHolder>
       </div>
       <div>
+      
         <Expiry>{expiry}</Expiry>
+      </div>
+      <div>
+      
         <CVC>{cvc}</CVC>
       </div>
-      <EditButton>
-        <img src="/pics/edit-icon.svg" alt="Edit Icon" />
-      </EditButton>
+      <div>
+        <EditButton>
+          <img src="/pics/edit-icon.svg" alt="Edit Icon" />
+        </EditButton>
+      </div>
     </CardWrapper>
   );
 };
