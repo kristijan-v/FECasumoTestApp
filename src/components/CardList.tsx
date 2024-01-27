@@ -9,6 +9,7 @@ import {PageContainer,
   Description,
   CardButton,
   Header,
+  CardListAndButtonContainer
 } from './styles/CardList'
 import Card from './CreditCard';
 import VisaCreditCard from './VisaCreditCard';
@@ -58,10 +59,10 @@ const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
   const cards = useSelector((state: RootState) => state.cards.cards);
   let editingCard;
   if (isMockCard) {
-    // If editing a mock card, set the mock card data directly
+    
     editingCard = currentEditingCard === mockCard.id ? mockCard : mockCardVisa;
   } else {
-    // For real cards, find the card in the cards array
+    
     editingCard = currentEditingCard !== null ? cards.find(card => card.id === currentEditingCard) : undefined;
   }
 
@@ -79,6 +80,7 @@ const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
         <Description>Add, edit, or delete your cards anytime</Description>
       </Header>
       <ContentContainer style={{ paddingTop: `${topPadding + 20}px` }}>
+      <CardListAndButtonContainer>
         <CardListContainer>
         <Card
             key={mockCard.id}
@@ -110,6 +112,7 @@ const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
         <CardButtonContainer>
           <CardButton onClick={onAddNewCard}>Add New Card</CardButton>
         </CardButtonContainer>
+      </CardListAndButtonContainer>
       </ContentContainer>
       {isEditing && editingCard && (
   <EditCard card={editingCard} isMockCard={isMockCard} onClose={() => setIsEditing(false)} />
@@ -120,3 +123,4 @@ const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
 };
 
 export default CardList;
+

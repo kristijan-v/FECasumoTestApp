@@ -7,7 +7,7 @@ export const PageContainer = styled.div`
 `;
 
 export const Header = styled.div`
-  background-color: #ffffff;
+  
   padding: 16px;
   text-align: left;
   position: fixed;
@@ -19,22 +19,26 @@ export const Header = styled.div`
 export const ContentContainer = styled.div`
   flex-grow: 1;
   padding: 40px;
-  padding-top: 140px; /* Increased padding to account for header height */
+  padding-top: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 `;
 
+export const CardListAndButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 48px;
+`;
 
 export const CardListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   gap: 20px;
- 
 `;
-
 
 export const CardButtonContainer = styled.div`
   background-color: #ffffff;
@@ -46,13 +50,11 @@ export const CardButtonContainer = styled.div`
   z-index: 1;
 `;
 
-
 export const Heading = styled.h2`
   color: #3B058E;
   font-size: 40px;
   font-weight: bold;
   margin-bottom: 4px;
-  
 `;
 
 export const Description = styled.p`
@@ -70,7 +72,6 @@ export const CardButton = styled.button`
   border-radius: 50px;
   cursor: pointer;
   outline: none;
-  font-weight:
   transition: background-color 0.3s;
   display: inline-block;
   white-space: nowrap;

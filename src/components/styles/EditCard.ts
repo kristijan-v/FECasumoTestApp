@@ -14,7 +14,6 @@ export const Overlay = styled.div`
 `;
 
 export const Container = styled.div`
-  position: fixed;
   background: #FFFFFF;
   border-radius: 20px;
   padding: 20px;
@@ -22,12 +21,17 @@ export const Container = styled.div`
   width: 100%;
   max-width: 400px;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  max-height: 90vh;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   @media (max-width: 768px) {
     max-width: 90%;
-    left: 50%;
     top: auto;
     bottom: 20px;
     transform: translateX(-50%);
@@ -39,71 +43,85 @@ export const Title = styled.h2`
   color: #1A212C;
   font-size: 24px;
   text-align: center;
-  margin-bottom: 56px;
+  margin-bottom: 24px;
 `;
 
 export const Form = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 
 export const Label = styled.label`
   font-family: 'CustomFont1', sans-serif;
   color: #1A212C;
   font-size: 16px;
-  display: block;
-  margin-bottom:26px;
-  position: relative;
-  display: block;
-
+  margin-bottom: 8px;
 `;
-
 
 export const Input = styled.input`
   font-family: 'CustomFont1', sans-serif;
   font-size: 16px;
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 12px;
+  margin-bottom: 16px;
   border: 0;
-  border-bottom: 1px solid #DDE3E9;
-  background-color: transparent;
-  display: block;
+  border-bottom: 2px solid #DDE3E9;
+  color: #1A212C;
   width: 100%;
   box-sizing: border-box;
-  color: #798291;
-
   &:focus {
     outline: none;
-  }`
-
-
-export const SubmitButton = styled.button`
-background-color: #3B058E;
-color: #FFFFFF;
-border: none;
-padding: 15px 20px;
-border-radius: 50px;
-font-family: 'CustomFont1', sans-serif;
-font-size: 16px;
-cursor: pointer;
-transition: background-color 0.3s ease;
-margin-top: 20px; /* Adjust the top spacing as needed */
+    border-bottom: 2px solid #3B058E;
+  }
+  &::placeholder {
+    color: #999;
+  }
 `;
 
+export const SubmitButton = styled.button`
+  background-color: #3B058E;
+  color: #FFFFFF;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 50px;
+  font-family: 'CustomFont1', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  width: 100%;
+  &:hover {
+    background-color: #4B169E;
+  }
+`;
+
+export const DeleteButton = styled.button`
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 15px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%; 
+  &:hover {
+    background-color: #ff7875;
+  }
+`;
 
 export const CloseButton = styled.button`
-position: absolute;
-top: 20px;
-right: 20px;
-background-color: transparent;
-border: none;
-font-family: 'CustomFont1', sans-serif;
-font-size: 24px;
-cursor: pointer;
-color: #000000;
-padding: 0;
-
-&:hover {
-  color: #666;
-}
+  background-color: transparent;
+  border: none;
+  font-family: 'CustomFont1', sans-serif;
+  font-size: 24px;
+  cursor: pointer;
+  color: #000000;
+  padding: 0;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  &:hover {
+    color: #666;
+  }
 `;

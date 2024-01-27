@@ -1,4 +1,3 @@
-// cardsSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Card {
@@ -24,15 +23,21 @@ export const cardsSlice = createSlice({
     addCard: (state, action: PayloadAction<Card>) => {
       state.cards.push(action.payload);
     },
+    
     editCard: (state, action: PayloadAction<{ id: number; card: Partial<Card> }>) => {
-        const index = state.cards.findIndex((c) => c.id === action.payload.id);
-        if (index !== -1) {
-          state.cards[index] = { ...state.cards[index], ...action.payload.card };
-        }
-      },
+      const index = state.cards.findIndex((c) => c.id === action.payload.id);
+      if (index !== -1) {
+        state.cards[index] = { ...state.cards[index], ...action.payload.card };
+      }
     },
-  });
 
-export const { addCard, editCard } = cardsSlice.actions;
+    deleteCard: (state, action: PayloadAction<number>) => {
+      state.cards = state.cards.filter((card) => card.id !== action.payload);
+    },
+  },
+});
+
+export const { addCard, editCard, deleteCard } = cardsSlice.actions;
 
 export default cardsSlice.reducer;
+
