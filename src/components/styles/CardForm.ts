@@ -39,42 +39,54 @@ export const Label = styled.label`
   color: #1A212C;
   font-size: 16px;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom:26px;
+  position: relative;
+  display: block;
+
 `;
 
-export const Input = styled.input<{ success: boolean }>`
+export const Input = styled.input<{ success: boolean; error: string }>`
   font-family: 'CustomFont1', sans-serif;
   font-size: 16px;
-  padding: 16px;
+  font-weight: normal;
+  padding: 8px;
   margin-bottom: 16px;
   border: 0;
-  border-bottom: 2px solid ${({ success }) => (success ? '#4CAF50' : '#DDE3E9')};
-  
+  border-bottom: 2px solid ${({ success, error }) => (success ? '#19AC51' : error ? '#FC484C' : '#DDE3E9')};
+  color: ${({ success, error }) => (success ? '#19AC51' : error ? '#FC484C' : '#1A212C')};
   display: block;
   width: 100%;
   box-sizing: border-box;
 
   &::placeholder {
     color: #999;
+    font-weight: normal;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus::placeholder {
+    color: transparent;
   }
 
   ${({ success }) =>
     success &&
     `
-    border-color: #4CAF50;
+    &::after {
+      content: '';
+      
+      background-size: cover;
+      display: block;
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+    }
   `}
-
-  /* Position the success icon */
-  position: relative;
-
-  /* Style for the success icon */
-  & > svg {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    fill: #4CAF50; /* Icon color for the success state */
-  }
 `;
 
 
@@ -82,15 +94,18 @@ export const Input = styled.input<{ success: boolean }>`
 export const Error = styled.div`
   color: #FF5A5F;
   font-size: 12px;
-  margin-bottom: 10px;
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
 `;
 
-export const SubmitButton = styled.button`
-  background-color: #666EE8;
+export const SubmitButton = styled.button<{ formValid?: boolean; formError?: boolean }>`
+  background-color: #3B058E;
   color: #FFFFFF;
   border: none;
   padding: 15px 20px;
-  border-radius: 4px;
+  border-radius: 50px;
   font-family: 'CustomFont1', sans-serif;
   font-size: 16px;
   cursor: pointer;
@@ -127,4 +142,11 @@ export const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const IconWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-20%);
 `;

@@ -11,8 +11,11 @@ import {
   SubmitButton,
   CloseButton,
   Overlay,
-} from "./styles/AddNewCard";
+  IconWrapper,
+} from "./styles/CardForm";
 import "../custom-font1.css";
+import { ReactComponent as SuccessIcon } from "../assets/form-success.svg";
+import { ReactComponent as ErrorIcon } from "../assets/form-error.svg";
 
 interface CardFormProps {
   onClose: () => void;
@@ -79,10 +82,37 @@ const CardForm: React.FC<CardFormProps> = ({ isOpen, onClose }) => {
 
     setCardData((prevData) => ({ ...prevData, [name]: formattedValue }));
 
-    if (value.trim() !== "" && value.length !== e.target.maxLength) {
+    let errorMessage = "";
+    let isValid = false;
+
+    if (formattedValue === "") {
       setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+      setSuccess((prevSuccess) => ({ ...prevSuccess, [name]: false }));
+      return;
+  }
+
+    switch (name) {
+      case "name":
+        isValid = /^[a-zA-Z]+(?: [a-zA-Z]+)+$/.test(value.trim());
+        errorMessage = isValid ? "" : "Please fill in your name";
+        break;
+      case "number":
+        isValid = /^\d{4} \d{4} \d{4} \d{4}$/.test(formattedValue);
+        errorMessage = isValid ? "" : "Please enter a valid credit card number";
+        break;
+      case "expiry":
+        isValid = /^(0[1-9]|1[0-2])\/(2[2-9]|[3-9][0-9])$/.test(formattedValue);
+        errorMessage = isValid ? "" : "Please enter a valid expiry date";
+        break;
+      case "cvc":
+        isValid = /^\d{3}$/.test(formattedValue);
+        errorMessage = isValid ? "" : "Please enter a valid security code";
+        break;
+      default:
+        break;
     }
-    const isValid = true; // Add your validation logic
+
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
     setSuccess((prevSuccess) => ({ ...prevSuccess, [name]: isValid }));
   };
 
@@ -104,10 +134,9 @@ const CardForm: React.FC<CardFormProps> = ({ isOpen, onClose }) => {
       return;
     }
 
-    // Regular expressions to validate the input formats
     const cardNumberPattern = /^\d{4} \d{4} \d{4} \d{4}$/;
     const cvcPattern = /^\d{3}$/;
-    const expiryPattern = /^(0[1-9]|1[0-2])\/(2[2-9]|[3-9][0-9])$/; // MM/YY format
+    const expiryPattern = /^(0[1-9]|1[0-2])\/(2[2-9]|[3-9][0-9])$/;
 
     if (!cardNumberPattern.test(cardData.number)) {
       setErrors({ ...errors, number: "Invalid card number" });
@@ -127,16 +156,14 @@ const CardForm: React.FC<CardFormProps> = ({ isOpen, onClose }) => {
       return;
     }
 
-    // Split the expiry date into month and year
     const [month, year] = cardData.expiry
       .split("/")
       .map((part) => parseInt(part, 10));
 
     // Get the current date
     const currentDate = new Date();
-    const currentYear = currentDate.getFullYear() % 100; // Get last two digits of current year
+    const currentYear = currentDate.getFullYear() % 100;
 
-    // Check if the expiry date is older than the current date
     if (
       year < currentYear ||
       (year === currentYear && month < currentDate.getMonth() + 1)
@@ -148,7 +175,6 @@ const CardForm: React.FC<CardFormProps> = ({ isOpen, onClose }) => {
       return;
     }
 
-    // If all validations pass, you can proceed with submitting the form
     dispatch(addCard({ ...cardData, id: Date.now() }));
     setCardData({ name: "", number: "", expiry: "", cvc: "" });
     onClose();
@@ -158,74 +184,97 @@ const CardForm: React.FC<CardFormProps> = ({ isOpen, onClose }) => {
     <>
       {isOpen && (
         <Overlay>
-      <Container>
-        <CloseButton type="button" onClick={onClose} className="cancel-button">
-          X
-        </CloseButton>
-        <Title>Add your card details</Title>
-        <Form onSubmit={handleSubmit}>
-        <Label>
-          Name in card
-          <Input
-            type="text"
-            name="name"
-            value={cardData.name}
-            onChange={handleInputChange}
-            placeholder="John Doe"
-            success={success.name}
-          />
-          {errors.name && <Error>{errors.name}</Error>}
-         
-        </Label>
-        <Label>
-          Card number
-          <Input
-            type="text"
-            name="number"
-            value={cardData.number}
-            onChange={handleInputChange}
-            maxLength={19}
-            placeholder="0000 0000 0000 0000"
-            success={success.number}
-          />
-          {errors.number && <Error>{errors.number}</Error>}
-          
-        </Label>
-        <Label>
-          Expiry date
-          <Input
-            type="text"
-            name="expiry"
-            value={cardData.expiry}
-            onChange={handleInputChange}
-            maxLength={5}
-            placeholder="00/00"
-            success={success.expiry}
-          />
-          {errors.expiry && <Error>{errors.expiry}</Error>}
-          
-          
-        </Label>
-        <Label>
-          CVC (Security code)
-          <Input
-            type="text"
-            name="cvc"
-            value={cardData.cvc}
-            onChange={handleInputChange}
-            maxLength={3}
-            placeholder="000"
-            success={success.cvc}
-          />
-          {errors.name && <Error>{errors.name}</Error>}
-        </Label>
-        <SubmitButton type="submit">Submit</SubmitButton>
-        </Form>
-      </Container>
-    </Overlay>
-)}
-</>
-);
+          <Container>
+            <CloseButton
+              type="button"
+              onClick={onClose}
+              className="cancel-button"
+            >
+              X
+            </CloseButton>
+            <Title>Add your card details</Title>
+            <Form onSubmit={handleSubmit}>
+              <Label>
+                Name in card
+                <Input
+                  type="text"
+                  name="name"
+                  value={cardData.name}
+                  onChange={handleInputChange}
+                  placeholder="John Doe"
+                  success={success.name}
+                  error={errors.name}
+                />
+                <IconWrapper>
+                  {success.name && <SuccessIcon />}
+                  {errors.name && <ErrorIcon />}
+                </IconWrapper>
+                {errors.name && <Error>{errors.name}</Error>}
+              </Label>
+              <Label>
+                Card number
+                <Input
+                  type="text"
+                  name="number"
+                  value={cardData.number}
+                  onChange={handleInputChange}
+                  maxLength={19}
+                  placeholder="0000 0000 0000 0000"
+                  success={success.number}
+                  error={errors.number}
+                />
+                <IconWrapper>
+                  {success.number && <SuccessIcon />}
+                  {errors.number && <ErrorIcon />}
+                </IconWrapper>
+                {errors.number && <Error>{errors.number}</Error>}
+              </Label>
+              <Label>
+                Expiry date
+                <Input
+                  type="text"
+                  name="expiry"
+                  value={cardData.expiry}
+                  onChange={handleInputChange}
+                  maxLength={5}
+                  placeholder="00/00"
+                  success={success.expiry}
+                  error={errors.expiry}
+                />
+                <IconWrapper>
+                  {success.expiry && <SuccessIcon />}
+                  {errors.expiry && <ErrorIcon />}
+                </IconWrapper>
+                {errors.expiry && <Error>{errors.expiry}</Error>}
+              </Label>
+              <Label>
+                CVC (Security code)
+                <Input
+                  type="text"
+                  name="cvc"
+                  value={cardData.cvc}
+                  onChange={handleInputChange}
+                  maxLength={3}
+                  placeholder="000"
+                  success={success.cvc}
+                  error={errors.cvc}
+                />
+                <IconWrapper>
+                  {success.cvc && <SuccessIcon />}
+                  {errors.cvc && <ErrorIcon />}
+                </IconWrapper>
+                {errors.cvc && <Error>{errors.cvc}</Error>}
+              </Label>
+              <SubmitButton
+              >
+                Confirm
+              </SubmitButton>
+            </Form>
+          </Container>
+        </Overlay>
+      )}
+    </>
+  );
 };
 
 export default CardForm;

@@ -14,7 +14,7 @@ import {
 
 interface EditCardProps {
   card: { id: number; number: string; name: string; expiry: string; cvc: string };
-  onClose: () => void; // callback to close the edit form
+  onClose: () => void;
 }
 
 const EditCard: React.FC<EditCardProps> = ({ card, onClose }) => {
@@ -43,7 +43,7 @@ const EditCard: React.FC<EditCardProps> = ({ card, onClose }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Basic form validation
+
     if (!editedCardData.number || !editedCardData.name || !editedCardData.expiry || !editedCardData.cvc) {
       setErrors({
         number: 'Card number is required',
@@ -54,10 +54,8 @@ const EditCard: React.FC<EditCardProps> = ({ card, onClose }) => {
       return;
     }
 
-    // Add more specific validation if needed
-
     dispatch(editCard({ id: card.id, card: editedCardData }));
-    onClose(); // Close the edit form
+    onClose();
   };
 
   return (
