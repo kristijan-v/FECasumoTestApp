@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { deleteCard, editCard } from '../redux/cardSlice';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteCard, editCard } from "../redux/cardSlice";
 import {
   Container,
   Title,
@@ -11,13 +11,20 @@ import {
   CloseButton,
   Overlay,
   DeleteButton,
-  
-} from './styles/EditCard';
-import "../custom-font1.css";
-import CreditCard from './CreditCard';
+  CardPreviewWrapper,
+} from "./styles/EditCard";
+import "../GlobalStyle.ts";
+import CreditCard from "./CreditCard";
+import { ReactComponent as CloseIcon } from "../assets/close-btn.svg";
 
 interface EditCardProps {
-  card: { id: number; number: string; name: string; expiry: string; cvc: string };
+  card: {
+    id: number;
+    number: string;
+    name: string;
+    expiry: string;
+    cvc: string;
+  };
   onClose: () => void;
   isMockCard: boolean;
 }
@@ -47,38 +54,28 @@ const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
 
   const CardPreview = () => {
     return (
-      
-      <CreditCard
-        number={editedCardData.number}
-        name={editedCardData.name}
-        expiry={editedCardData.expiry}
-        cvc={editedCardData.cvc}
-        onEdit={() => {}}
-      />
-     
+      <CardPreviewWrapper>
+        <CreditCard
+          number={editedCardData.number}
+          name={editedCardData.name}
+          expiry={editedCardData.expiry}
+          cvc={editedCardData.cvc}
+        />
+      </CardPreviewWrapper>
     );
   };
 
   return (
     <Overlay>
       <Container>
-        <CloseButton onClick={onClose}>×</CloseButton>
+        <CloseButton onClick={onClose}>
+          <CloseIcon />
+        </CloseButton>
         <Title>Edit your card</Title>
-        
+
         <CardPreview />
-        
+
         <Form onSubmit={handleSubmit}>
-          
-          <Label>
-            Card Number
-            <Input
-              type="text"
-              name="number"
-              placeholder="Card Number"
-              value={editedCardData.number}
-              onChange={handleInputChange}
-            />
-          </Label>
           <Label>
             Cardholder Name
             <Input
@@ -86,6 +83,16 @@ const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
               name="name"
               placeholder="Cardholder Name"
               value={editedCardData.name}
+              onChange={handleInputChange}
+            />
+          </Label>
+          <Label>
+            Card Number
+            <Input
+              type="text"
+              name="number"
+              placeholder="Card Number"
+              value={editedCardData.number}
               onChange={handleInputChange}
             />
           </Label>
@@ -110,7 +117,10 @@ const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
             />
           </Label>
           <SubmitButton type="submit">Confirm</SubmitButton>
-          <DeleteButton type="button" onClick={() => dispatch(deleteCard(card.id))}>
+          <DeleteButton
+            type="button"
+            onClick={() => dispatch(deleteCard(card.id))}
+          >
             Delete card
           </DeleteButton>
         </Form>
@@ -120,4 +130,3 @@ const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
 };
 
 export default EditCard;
-

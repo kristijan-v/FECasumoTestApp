@@ -22,11 +22,12 @@ transform: translate(-50%, -50%);
 `;
 
 export const Title = styled.h2`
-  font-family: 'CustomFont1', sans-serif;
   color: #1A212C;
   font-size: 24px;
-  text-align: center;
-  margin-bottom: 56px;
+  text-align: left;
+  margin-bottom: 64px;
+  width: 100%; 
+  padding-left: 8px;
 `;
 
 export const Form = styled.form`
@@ -35,7 +36,6 @@ export const Form = styled.form`
 `;
 
 export const Label = styled.label`
-  font-family: 'CustomFont1', sans-serif;
   color: #1A212C;
   font-size: 16px;
   display: block;
@@ -46,9 +46,8 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input<{ success: boolean; error: string }>`
-  font-family: 'CustomFont1', sans-serif;
   font-size: 16px;
-  font-weight: normal;
+  font-weight: bold;
   padding: 8px;
   margin-bottom: 16px;
   border: 0;
@@ -106,11 +105,10 @@ export const SubmitButton = styled.button<{ formValid?: boolean; formError?: boo
   border: none;
   padding: 15px 20px;
   border-radius: 50px;
-  font-family: 'CustomFont1', sans-serif;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 20px; /* Adjust the top spacing as needed */
+  margin-top: 20px;
 `;
 
 
@@ -120,7 +118,6 @@ export const CloseButton = styled.button`
   right: 20px;
   background-color: transparent;
   border: none;
-  font-family: 'CustomFont1', sans-serif;
   font-size: 24px;
   cursor: pointer;
   color: #000000;
@@ -137,8 +134,8 @@ export const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-  z-index: 999; /* Place the overlay below the popup but above other content */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;

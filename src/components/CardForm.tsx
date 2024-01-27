@@ -13,9 +13,9 @@ import {
   Overlay,
   IconWrapper,
 } from "./styles/CardForm";
-import "../custom-font1.css";
 import { ReactComponent as SuccessIcon } from "../assets/form-success.svg";
 import { ReactComponent as ErrorIcon } from "../assets/form-error.svg";
+import { ReactComponent as CloseIcon } from "../assets/close-btn.svg";
 
 interface CardFormProps {
   onClose: () => void;
@@ -189,7 +189,7 @@ const CardForm: React.FC<CardFormProps> = ({ isOpen, onClose }) => {
               onClick={onClose}
               className="cancel-button"
             >
-              X
+              <CloseIcon/>
             </CloseButton>
             <Title>Add your card details</Title>
             <Form onSubmit={handleSubmit}>

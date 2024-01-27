@@ -8,18 +8,25 @@ import {
   Expiry,
   CVC,
   EditButton,
+  CVCLabel,
+  EXPLabel,
 } from "./styles/Card";
-import "../custom-font1.css";
 
 interface CardProps {
   number: string;
   name: string;
   expiry: string;
   cvc: string;
-  onEdit: () => void;
+  onEdit?: () => void;
 }
 
-const CreditCard: React.FC<CardProps> = ({ name, number, expiry, cvc, onEdit }) => {
+const CreditCard: React.FC<CardProps> = ({
+  name,
+  number,
+  expiry,
+  cvc,
+  onEdit,
+}) => {
   return (
     <CardWrapper>
       <BackgroundPattern />
@@ -33,18 +40,20 @@ const CreditCard: React.FC<CardProps> = ({ name, number, expiry, cvc, onEdit }) 
         <CardHolder>{name}</CardHolder>
       </div>
       <div>
-      
+      <EXPLabel>EXPIRES</EXPLabel>
         <Expiry>{expiry}</Expiry>
       </div>
       <div>
-      
+      <CVCLabel>CVC</CVCLabel>
         <CVC>{cvc}</CVC>
       </div>
+      {onEdit && (
       <div>
         <EditButton onClick={onEdit}>
           <img src="/pics/edit-icon.svg" alt="Edit Icon" />
         </EditButton>
       </div>
+      )}
     </CardWrapper>
   );
 };

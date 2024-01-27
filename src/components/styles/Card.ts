@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
-  background: linear-gradient(145deg, #3B058E, #5E34A9);
+  background: #3B058E;
   border-radius: 16px;
   padding: 1em;
   width: 320px;
   height: 200px;
   position: relative;
-  font-family: 'CustomFont1', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -53,13 +52,12 @@ export const EditButton = styled.button`
 
 export const CardNumber = styled.div`
   font-size: 16px;
-  
+  letter-spacing: 1.5px;
   
   color: #E5E5E5;
   position: absolute;
   bottom: 32px;
   left: 24px;
-  font-family: 'CustomFont2', sans-serif;
 `;
 
 
@@ -74,7 +72,7 @@ export const CardHolder = styled.div`
 
 
 export const Expiry = styled.div`
-font-size: 20px;
+font-size: 24px;
 font-weight: bold;
 color: #FFFFFF;
 position: absolute;
@@ -84,11 +82,29 @@ padding: 24px 16px;
 `;
 
 export const CVC = styled.div`
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
   color: #FFFFFF;
   position: absolute;
   top: 24px;
   right: 24px;
   padding: 24px 100px; 
+`;
+
+export const CVCLabel = styled.p`
+font-size: 12px;
+color: #E5E5E5;
+position: absolute;
+top: -4px;
+right: 24px;
+padding: 24px 100px; 
+`;
+
+export const EXPLabel = styled.p`
+font-size: 12px;
+color: #E5E5E5;
+position: absolute;
+top: 4px;
+right: 32px;
+padding: 16px 12px; 
 `;

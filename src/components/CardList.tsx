@@ -9,11 +9,13 @@ import {PageContainer,
   Description,
   CardButton,
   Header,
-  CardListAndButtonContainer
+  CardListAndButtonContainer,
+  LogoWrapper,
 } from './styles/CardList'
 import Card from './CreditCard';
 import VisaCreditCard from './VisaCreditCard';
 import EditCard from './EditCard';
+import { ReactComponent as LogoIcon } from "../assets/casumo-logo.svg";
 
 
 interface CardListProps {
@@ -76,6 +78,7 @@ const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
   return (
     <PageContainer>
       <Header ref={headerRef}>
+        <LogoWrapper><LogoIcon/></LogoWrapper>
         <Heading>Your Cards</Heading>
         <Description>Add, edit, or delete your cards anytime</Description>
       </Header>

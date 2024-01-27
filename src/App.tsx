@@ -5,6 +5,7 @@ import { RootState } from './app/store';
 import CardList from './components/CardList';
 import CardForm from './components/CardForm';
 import EditCard from './components/EditCard';
+import GlobalStyle from './GlobalStyle';
 
 const App: React.FC = () => {
   const cards = useSelector((state: RootState) => state.cards.cards);
@@ -30,6 +31,7 @@ const App: React.FC = () => {
 
   return (
     <div>
+      <GlobalStyle />
       <CardList onEdit={handleEdit} onAddNewCard={handleAddNewCard} />
       {showNewCardForm && <CardForm isOpen={showNewCardForm} onClose={handleNewCardFormClose} />}
       {editingCard !== null && <EditCard 

@@ -7,7 +7,6 @@ export const CardWrapper = styled.div`
   width: 320px;
   height: 200px;
   position: relative;
-  font-family: 'CustomFont1', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -28,7 +27,7 @@ export const BackgroundPattern = styled.div`
 
 export const LogoWrapper = styled.div`
   position: absolute;
-  top: 32px;
+  top: 48px;
   left: 32px;
   img {
     width: 60px;
@@ -52,14 +51,13 @@ export const EditButton = styled.button`
 `;
 
 export const CardNumber = styled.div`
+letter-spacing: 1.5px;
   font-size: 16px;
   font-weight: bold;
-  
   color: #444E5D;
   position: absolute;
   bottom: 32px;
   left: 24px;
-  font-family: 'CustomFont2', sans-serif;
 `;
 
 
@@ -74,7 +72,7 @@ export const CardHolder = styled.div`
 
 
 export const Expiry = styled.div`
-font-size: 20px;
+font-size: 24px;
 font-weight: bold;
 color: #FFFFFF;
 position: absolute;
@@ -84,11 +82,29 @@ padding: 24px 16px;
 `;
 
 export const CVC = styled.div`
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
   color: #FFFFFF;
   position: absolute;
   top: 24px;
   right: 24px;
   padding: 24px 100px; 
+`;
+
+export const CVCLabel = styled.p`
+font-size: 12px;
+color: #444E5D;
+position: absolute;
+top: -4px;
+right: 24px;
+padding: 24px 100px; 
+`;
+
+export const EXPLabel = styled.p`
+font-size: 12px;
+color: #444E5D;
+position: absolute;
+top: 4px;
+right: 32px;
+padding: 16px 12px; 
 `;

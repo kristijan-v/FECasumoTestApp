@@ -39,11 +39,12 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-family: 'CustomFont1', sans-serif;
   color: #1A212C;
   font-size: 24px;
-  text-align: center;
+  text-align: left;
   margin-bottom: 24px;
+  width: 100%; 
+  padding-left: 32px;
 `;
 
 export const Form = styled.form`
@@ -54,39 +55,34 @@ export const Form = styled.form`
 `;
 
 export const Label = styled.label`
-  font-family: 'CustomFont1', sans-serif;
   color: #1A212C;
   font-size: 16px;
   margin-bottom: 8px;
 `;
 
 export const Input = styled.input`
-  font-family: 'CustomFont1', sans-serif;
   font-size: 16px;
   padding: 12px;
   margin-bottom: 16px;
   border: 0;
   border-bottom: 2px solid #DDE3E9;
-  color: #1A212C;
+  color: #798291;
   width: 100%;
   box-sizing: border-box;
   &:focus {
     outline: none;
     border-bottom: 2px solid #3B058E;
   }
-  &::placeholder {
-    color: #999;
-  }
 `;
 
 export const SubmitButton = styled.button`
-  background-color: #3B058E;
+  background-color: #4C00C2;
   color: #FFFFFF;
   border: none;
   padding: 15px 20px;
   border-radius: 50px;
-  font-family: 'CustomFont1', sans-serif;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-top: 20px;
@@ -97,31 +93,30 @@ export const SubmitButton = styled.button`
 `;
 
 export const DeleteButton = styled.button`
-  background-color: #ff4d4f;
-  color: white;
+  background-color: transparent;
+  color: #D3D8E1;
   border: none;
-  border-radius: 50px;
-  padding: 15px 20px;
+  font-weight: bold;
+  padding: 16px 24px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 4px;
   width: 100%; 
-  &:hover {
-    background-color: #ff7875;
-  }
+  
 `;
 
 export const CloseButton = styled.button`
   background-color: transparent;
   border: none;
-  font-family: 'CustomFont1', sans-serif;
   font-size: 24px;
   cursor: pointer;
   color: #000000;
-  padding: 0;
   position: absolute;
-  top: 10px;
-  right: 10px;
-  &:hover {
-    color: #666;
+  top: 16px;
+  right: 24px;
   }
+`;
+
+export const CardPreviewWrapper = styled.div`
+transform-origin: center;
+margin-bottom: 34px;
 `;
