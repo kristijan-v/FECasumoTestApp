@@ -44,7 +44,6 @@ export const EditButton = styled.button`
   position: absolute;
   bottom: 32px;
   right: 24px;
-  z-index: 999;
 
   img {
     width: 24px;

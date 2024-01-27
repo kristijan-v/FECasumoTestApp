@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store';
 import {PageContainer,
@@ -12,6 +12,7 @@ import {PageContainer,
 } from './styles/CardList'
 import Card from './CreditCard';
 import VisaCreditCard from './VisaCreditCard';
+import EditCard from './EditCard';
 
 
 interface CardListProps {
@@ -36,15 +37,48 @@ const mockCardVisa = {
 };
 
 const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
+
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [currentEditingCard, setCurrentEditingCard] = useState<number | null>(null);
+
+  const [isMockCard, setIsMockCard] = useState<boolean>(false);
+  
+  
+
+  const handleEdit = (cardId: number) => {
+    setCurrentEditingCard(cardId);
+    setIsEditing(true);
+    setIsMockCard(cardId === mockCard.id || cardId === mockCardVisa.id);
+  };
+
+
+
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [topPadding, setTopPadding] = useState<number>(0);
   const cards = useSelector((state: RootState) => state.cards.cards);
+  let editingCard;
+  if (isMockCard) {
+    // If editing a mock card, set the mock card data directly
+    editingCard = currentEditingCard === mockCard.id ? mockCard : mockCardVisa;
+  } else {
+    // For real cards, find the card in the cards array
+    editingCard = currentEditingCard !== null ? cards.find(card => card.id === currentEditingCard) : undefined;
+  }
+
+  
+  useEffect(() => {
+    if (headerRef.current) {
+      setTopPadding(headerRef.current.clientHeight);
+    }
+  }, []);
 
   return (
     <PageContainer>
-      <Header>
+      <Header ref={headerRef}>
         <Heading>Your Cards</Heading>
         <Description>Add, edit, or delete your cards anytime</Description>
       </Header>
-      <ContentContainer>
+      <ContentContainer style={{ paddingTop: `${topPadding + 20}px` }}>
         <CardListContainer>
         <Card
             key={mockCard.id}
@@ -52,6 +86,7 @@ const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
             name={mockCard.name}
             number={mockCard.number}
             expiry={mockCard.expiry}
+            onEdit={() => handleEdit(mockCard.id)}
           />
         <VisaCreditCard
             key={mockCardVisa.id}
@@ -59,6 +94,7 @@ const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
             name={mockCardVisa.name}
             number={mockCardVisa.number}
             expiry={mockCardVisa.expiry}
+            onEdit={() => handleEdit(mockCardVisa.id)}
           />
           {cards.map((card) => (
             <Card
@@ -67,6 +103,7 @@ const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
               name={card.name}
               number={card.number}
               expiry={card.expiry}
+              onEdit={() => handleEdit(card.id)}
             />
           ))}
         </CardListContainer>
@@ -74,6 +111,10 @@ const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
           <CardButton onClick={onAddNewCard}>Add New Card</CardButton>
         </CardButtonContainer>
       </ContentContainer>
+      {isEditing && editingCard && (
+  <EditCard card={editingCard} isMockCard={isMockCard} onClose={() => setIsEditing(false)} />
+)}
+
     </PageContainer>
   );
 };

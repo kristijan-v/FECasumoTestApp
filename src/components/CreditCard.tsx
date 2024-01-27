@@ -16,9 +16,10 @@ interface CardProps {
   name: string;
   expiry: string;
   cvc: string;
+  onEdit: () => void;
 }
 
-const CreditCard: React.FC<CardProps> = ({ name, number, expiry, cvc }) => {
+const CreditCard: React.FC<CardProps> = ({ name, number, expiry, cvc, onEdit }) => {
   return (
     <CardWrapper>
       <BackgroundPattern />
@@ -40,7 +41,7 @@ const CreditCard: React.FC<CardProps> = ({ name, number, expiry, cvc }) => {
         <CVC>{cvc}</CVC>
       </div>
       <div>
-        <EditButton>
+        <EditButton onClick={onEdit}>
           <img src="/pics/edit-icon.svg" alt="Edit Icon" />
         </EditButton>
       </div>

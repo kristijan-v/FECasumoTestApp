@@ -160,7 +160,6 @@ const CardForm: React.FC<CardFormProps> = ({ isOpen, onClose }) => {
       .split("/")
       .map((part) => parseInt(part, 10));
 
-    // Get the current date
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear() % 100;
 

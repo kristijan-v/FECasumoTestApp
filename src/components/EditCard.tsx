@@ -15,9 +15,10 @@ import {
 interface EditCardProps {
   card: { id: number; number: string; name: string; expiry: string; cvc: string };
   onClose: () => void;
+  isMockCard: boolean;
 }
 
-const EditCard: React.FC<EditCardProps> = ({ card, onClose }) => {
+const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
   const dispatch = useDispatch();
 
   const [editedCardData, setEditedCardData] = useState({
@@ -42,6 +43,15 @@ const EditCard: React.FC<EditCardProps> = ({ card, onClose }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+  
+    
+    if (isMockCard) {
+     
+      onClose();
+      return;
+    }
+  
+
 
 
     if (!editedCardData.number || !editedCardData.name || !editedCardData.expiry || !editedCardData.cvc) {

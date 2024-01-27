@@ -9,6 +9,7 @@ import EditCard from './components/EditCard';
 const App: React.FC = () => {
   const cards = useSelector((state: RootState) => state.cards.cards);
   const [editingCard, setEditingCard] = useState<number | null>(null);
+  const isEditingMockCard = editingCard === -1 || editingCard === -2;
   const [showNewCardForm, setShowNewCardForm] = useState(false);
 
   const handleEdit = (id: number) => {
@@ -31,7 +32,11 @@ const App: React.FC = () => {
     <div>
       <CardList onEdit={handleEdit} onAddNewCard={handleAddNewCard} />
       {showNewCardForm && <CardForm isOpen={showNewCardForm} onClose={handleNewCardFormClose} />}
-      {editingCard !== null && <EditCard card={cards.find(card => card.id === editingCard)!} onClose={handleEditClose} />}
+      {editingCard !== null && <EditCard 
+          card={cards.find(card => card.id === editingCard)!} 
+          onClose={handleEditClose} 
+          isMockCard={isEditingMockCard}
+        />}
     </div>
   );
 };

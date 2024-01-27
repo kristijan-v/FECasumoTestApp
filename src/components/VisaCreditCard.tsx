@@ -16,6 +16,7 @@ interface CardProps {
   name: string;
   expiry: string;
   cvc: string;
+  onEdit: () => void;
 }
 
 const VisaCreditCard: React.FC<CardProps> = ({ name, number, expiry, cvc }) => {
