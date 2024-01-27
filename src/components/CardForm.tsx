@@ -246,7 +246,7 @@ const CardForm: React.FC<CardFormProps> = ({ isOpen, onClose }) => {
                 </IconWrapper>
                 {errors.expiry && <Error>{errors.expiry}</Error>}
               </Label>
-              <Label>
+              <Label isCvc>
                 CVC (Security code)
                 <Input
                   type="text"

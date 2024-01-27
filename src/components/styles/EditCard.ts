@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+interface LabelProps {
+  isCvc?: boolean;
+}
 
 export const Overlay = styled.div`
   position: fixed;
@@ -42,28 +45,36 @@ export const Title = styled.h2`
   color: #1A212C;
   font-size: 24px;
   text-align: left;
-  margin-bottom: 24px;
+  margin-bottom: 36px;
+  margin-top: 48px;
   width: 100%; 
   padding-left: 32px;
 `;
 
 export const Form = styled.form`
-  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 `;
 
-export const Label = styled.label`
+export const Label = styled.label<LabelProps>`
   color: #1A212C;
   font-size: 16px;
-  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom:16px;
+  position: relative;
+ font-weight: bold;
+
+ ${({ isCvc }) => isCvc && `
+    font-weight: normal;
+  `}
 `;
 
 export const Input = styled.input`
   font-size: 16px;
   padding: 12px;
   margin-bottom: 16px;
+  letter-spacing: 0.5px;
   border: 0;
   border-bottom: 2px solid #DDE3E9;
   color: #798291;

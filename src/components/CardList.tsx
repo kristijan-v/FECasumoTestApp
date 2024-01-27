@@ -79,7 +79,7 @@ const CardList: React.FC<CardListProps> = ({ onEdit, onAddNewCard }) => {
     <PageContainer>
       <Header ref={headerRef}>
         <LogoWrapper><LogoIcon/></LogoWrapper>
-        <Heading>Your Cards</Heading>
+        <Heading>Your cards</Heading>
         <Description>Add, edit, or delete your cards anytime</Description>
       </Header>
       <ContentContainer style={{ paddingTop: `${topPadding + 20}px` }}>

@@ -77,11 +77,10 @@ const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
 
         <Form onSubmit={handleSubmit}>
           <Label>
-            Cardholder Name
+            Name in card
             <Input
               type="text"
               name="name"
-              placeholder="Cardholder Name"
               value={editedCardData.name}
               onChange={handleInputChange}
             />
@@ -91,7 +90,6 @@ const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
             <Input
               type="text"
               name="number"
-              placeholder="Card Number"
               value={editedCardData.number}
               onChange={handleInputChange}
             />
@@ -101,17 +99,15 @@ const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
             <Input
               type="text"
               name="expiry"
-              placeholder="MM/YY"
               value={editedCardData.expiry}
               onChange={handleInputChange}
             />
           </Label>
-          <Label>
-            CVC
+          <Label isCvc>
+            CVC (Security code)
             <Input
               type="text"
               name="cvc"
-              placeholder="CVC"
               value={editedCardData.cvc}
               onChange={handleInputChange}
             />

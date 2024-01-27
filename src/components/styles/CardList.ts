@@ -62,6 +62,11 @@ export const Heading = styled.h2`
   margin-bottom: 4px;
   padding-top: 24px;
   padding-left: 32px;
+
+  @media (min-width: 440px) {
+    padding-right: 220px;
+    text-align: center;
+  }
 `;
 
 export const Description = styled.p`
@@ -69,7 +74,12 @@ export const Description = styled.p`
   font-size: 15px;
   margin-top: 4px;
   padding-left: 32px;
-  `
+
+  @media (min-width: 440px) {
+    padding-right: 120px;
+    text-align: center;
+  }
+  `;
 
 export const CardButton = styled.button`
   background-color: #4C00C2;

@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+interface LabelProps {
+  isCvc?: boolean;
+}
 
 export const Container = styled.div`
 position: fixed;
@@ -23,7 +26,7 @@ transform: translate(-50%, -50%);
 
 export const Title = styled.h2`
   color: #1A212C;
-  font-size: 24px;
+  font-size: 30px;
   text-align: left;
   margin-bottom: 64px;
   width: 100%; 
@@ -33,21 +36,26 @@ export const Title = styled.h2`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  padding: 0 24px;
 `;
 
-export const Label = styled.label`
+export const Label = styled.label<LabelProps>`
   color: #1A212C;
   font-size: 16px;
+  letter-spacing: 0.5px;
   display: block;
   margin-bottom:26px;
   position: relative;
-  display: block;
+ font-weight: bold;
 
+ ${({ isCvc }) => isCvc && `
+    font-weight: normal;
+  `}
 `;
 
 export const Input = styled.input<{ success: boolean; error: string }>`
   font-size: 16px;
-  font-weight: bold;
+  letter-spacing: 0.5px;
   padding: 8px;
   margin-bottom: 16px;
   border: 0;
@@ -92,11 +100,12 @@ export const Input = styled.input<{ success: boolean; error: string }>`
 
 export const Error = styled.div`
   color: #FF5A5F;
-  font-size: 12px;
+  font-size: 14px;
   position: absolute;
   bottom: -8px;
   left: 0;
   width: 100%;
+  font-weight: normal;
 `;
 
 export const SubmitButton = styled.button<{ formValid?: boolean; formError?: boolean }>`
@@ -108,7 +117,8 @@ export const SubmitButton = styled.button<{ formValid?: boolean; formError?: boo
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 20px;
+  margin-top: 24px;
+  margin-bottom: 65px;
 `;
 
 
