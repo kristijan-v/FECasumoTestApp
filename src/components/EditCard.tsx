@@ -7,10 +7,11 @@ import {
   Form,
   Label,
   Input,
-  Error,
   SubmitButton,
   CloseButton,
+  Overlay,
 } from './styles/EditCard';
+import "../custom-font1.css";
 
 interface EditCardProps {
   card: { id: number; number: string; name: string; expiry: string; cvc: string };
@@ -28,47 +29,21 @@ const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
     cvc: card.cvc,
   });
 
-  const [errors, setErrors] = useState({
-    number: '',
-    name: '',
-    expiry: '',
-    cvc: '',
-  });
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setEditedCardData((prevData) => ({ ...prevData, [name]: value }));
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-  
-    
-    if (isMockCard) {
-     
-      onClose();
-      return;
+    if (!isMockCard) {
+      dispatch(editCard({ id: card.id, card: editedCardData }));
     }
-  
-
-
-
-    if (!editedCardData.number || !editedCardData.name || !editedCardData.expiry || !editedCardData.cvc) {
-      setErrors({
-        number: 'Card number is required',
-        name: 'Cardholder name is required',
-        expiry: 'Expiry date is required',
-        cvc: 'CVC is required',
-      });
-      return;
-    }
-
-    dispatch(editCard({ id: card.id, card: editedCardData }));
     onClose();
   };
 
   return (
+    <Overlay>
     <Container>
       <Title>Edit Card</Title>
       <Form onSubmit={handleSubmit}>
@@ -80,7 +55,6 @@ const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
             value={editedCardData.number}
             onChange={handleInputChange}
           />
-          <Error>{errors.number}</Error>
         </Label>
         <br />
         <Label>
@@ -91,7 +65,6 @@ const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
             value={editedCardData.name}
             onChange={handleInputChange}
           />
-          <Error>{errors.name}</Error>
         </Label>
         <br />
         <Label>
@@ -102,13 +75,16 @@ const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
             value={editedCardData.expiry}
             onChange={handleInputChange}
           />
-          <Error>{errors.expiry}</Error>
         </Label>
         <br />
         <Label>
           CVC:
-          <Input type="text" name="cvc" value={editedCardData.cvc} onChange={handleInputChange} />
-          <Error>{errors.cvc}</Error>
+          <Input
+            type="text"
+            name="cvc"
+            value={editedCardData.cvc}
+            onChange={handleInputChange}
+          />
         </Label>
         <br />
         <SubmitButton type="submit">Save Changes</SubmitButton>
@@ -116,7 +92,9 @@ const EditCard: React.FC<EditCardProps> = ({ card, isMockCard, onClose }) => {
           Cancel
         </CloseButton>
       </Form>
-    </Container>
+      </Container>
+  </Overlay>
+
   );
 };
 
